@@ -1,16 +1,26 @@
 <?php
-
 /*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
+	Redirect all users to the main website where they can shorten links
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->get('/', function () {
+    return redirect(env('MAIN_WEBSITE', 'https://noury.eu'));
 });
+
+
+
+/*
+	Redirect all other requests to their destination URL
+*/
+
+$router->get('/{uid}', 'LinkController@index');
+
+
+
+/*
+	REST-API for creating requests
+*/
+
+/*$router->group(['prefix' => 'api/v1'], function () use ($router) {
+    $router->post('link', 'LinkController@get');
+});*/

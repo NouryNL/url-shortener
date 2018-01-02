@@ -45,6 +45,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if(!env('APP_DEBUG', FALSE))
+            return redirect(env('MAIN_WEBSITE', 'https://noury.eu') . "/404");
+
         return parent::render($request, $e);
     }
 }
